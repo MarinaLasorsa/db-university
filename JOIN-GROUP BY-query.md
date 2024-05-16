@@ -110,3 +110,9 @@ GROUP BY `exams`.`id`;
 
 
 4. Contare quanti corsi di laurea ci sono per ogni dipartimento
+
+SELECT `departments`.`name` AS 'department_name', COUNT(`degrees`.`id`) AS 'degrees_number' 
+FROM `degrees` 
+INNER JOIN `departments` 
+ON `departments`.`id` = `degrees`.`department_id` 
+GROUP BY `departments`.`name`; 
