@@ -10,7 +10,7 @@ SELECT * FROM `courses` WHERE `cfu` > 10;
 
 3. Selezionare tutti gli studenti che hanno più di 30 anni
 
-SELECT * FROM `students` WHERE YEAR(`date_of_birth`) < 1994; 
+SELECT * FROM `students` WHERE TIMESTAMPDIFF(YEAR, `date_of_birth`, CURDATE()) > 30; 
 
 
 4. Selezionare tutti i corsi del primo semestre del primo anno di un qualsiasi corso di
@@ -23,18 +23,21 @@ SELECT * FROM `courses` WHERE `period` = 'I semestre' AND `year` = 1;
 20/06/2020 (21)
 
 SELECT * FROM `exams` WHERE `date` = '2020-06-20' AND `hour` BETWEEN '14:00:01' AND '23:59:59'; 
+oppure
+SELECT * FROM `exams` WHERE `date` = '2020-06-20' AND HOUR(`hour`) >= 14;
 
 
 6. Selezionare tutti i corsi di laurea magistrale (38)
 
 SELECT * FROM `degrees` WHERE `name` LIKE '%Magistrale%'; 
-
+oppure
+SELECT * FROM `degrees` WHERE `level` = 'magistrale';
 
 7. Da quanti dipartimenti è composta l'università? (12)
 
-SELECT COUNT(*) FROM `departments`; 
+SELECT COUNT(*) AS `numero_dipartimenti` FROM `departments`; 
 
 
 8. Quanti sono gli insegnanti che non hanno un numero di telefono? (50)
 
-SELECT COUNT(*) FROM `teachers` WHERE `phone` IS NULL; 
+SELECT COUNT(*) AS `teachers` FROM `teachers` WHERE `phone` IS NULL; 
